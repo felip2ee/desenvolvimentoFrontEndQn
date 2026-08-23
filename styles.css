@@ -1,0 +1,89 @@
+:root {
+    /* Cores principais */
+    --cor-fundo: oklch(1 0 0);
+    --cor-texto: oklch(0.145 0 0);
+
+    /* Cartões */
+    --cor-cartao: oklch(1 0 0);
+    --cor-texto-cartao: oklch(0.145 0 0);
+
+    /* Elementos secundários */
+    --cor-suave: oklch(0.97 0 0);
+    --cor-texto-suave: oklch(0.556 0 0);
+
+    /* Destaque */
+    --cor-primaria: oklch(0.205 0 0);
+    --cor-texto-primaria: oklch(0.985 0 0);
+
+    /* Controles e bordas */
+    --cor-borda: oklch(0.922 0 0);
+    --cor-input: oklch(0.922 0 0);
+    --cor-foco: oklch(0.708 0 0);
+
+    /* Cores dos status */
+    --cor-a-fazer: oklch(0.556 0 0);
+    --cor-em-andamento: oklch(0.62 0.19 255);
+    --cor-em-revisao: oklch(0.72 0.16 75);
+    --cor-concluida: oklch(0.62 0.17 145);
+
+    /* Escala de espaçamento */
+    --espaco-pequeno: 0.5rem;
+    --espaco-medio: 1rem;
+    --espaco-grande: 1.5rem;
+
+    /* Arredondamento */
+    --raio: 0.625rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+header,
+main,
+footer {
+    padding: var(--espaco-medio);
+}
+
+h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+section {
+  margin-bottom: var(--espaco-grande);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-medio);
+}
+
+fieldset {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: var(--espaco-medio);
+}
+
+input[type="search"] {
+  width: 100%;
+  padding: var(--espaco-pequeno);
+  border: 1px solid var(--cor-input);
+  border-radius: var(--raio);
+  font: inherit;
+}
