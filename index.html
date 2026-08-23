@@ -21,44 +21,63 @@
                 <fieldset>
                     <legend>Filtrar por status</legend>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="status-todos" name="status" value="todos" checked>
                     <label for="status-todos">Todos</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="status-fazer" name="status" value="a-fazer">
                     <label for="status-fazer">A fazer</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="status-andamento" name="status" value="em-andamento">
                     <label for="status-andamento">Em andamento</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="status-revisao" name="status" value="em-revisao">
                     <label for="status-revisao">Em revisão</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="status-concluida" name="status" value="concluida">
                     <label for="status-concluida">Concluída</label>
+                    </span>
+                    
                 </fieldset>
                 <fieldset>
                     <legend>Filtrar por Prioridade</legend>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="prioridade-todas" name="prioridade" value="todas" checked>
                     <label for="prioridade-todas">Todas</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="prioridade-baixa" name="prioridade" value="baixa">
                     <label for="prioridade-baixa">Baixa</label>
-                    
+                    </span>
+
+                    <span class="opcao-filtro">
                     <input type="radio" id="prioridade-media" name="prioridade" value="media">
                     <label for="prioridade-media">Média</label>
+                    </span>
 
+                    <span class="opcao-filtro">
                     <input type="radio" id="prioridade-alta" name="prioridade" value="alta">
                     <label for="prioridade-alta">Alta</label>
-               
+                    </span>
+
                 </fieldset>
             </form>
         </section>
 
-        <section aria-labelledby="titulo-quadro">
+        <section class="titulo-quadro" aria-labelledby="titulo-quadro">
             <h2 id="titulo-quadro">Quadro de tarefas</h2>
             
-            <section aria-labelledby="titulo-a-fazer">
+            <section class="coluna-status" aria-labelledby="titulo-a-fazer">
                 <h3 id="titulo-a-fazer">A fazer</h3>
                 <ul>
                     <li>
@@ -66,24 +85,24 @@
                             <h4>Construir estrutura HTML</h4>
                             <p>Projeto: Gerenciador Acadêmico</p>
                             <p>Responsável: Felipe</p>
-                            <p>Prazo: 15/08/2026</p>
-                            <p>Prioridade: Alta</p>
+                            <p class="prazo">Prazo:15/08/2026</p>
+                            <p class="prioridade"> Alta</p>
                         </article>
                     </li>
               
                     <li>
                         <article>
-                            <h4>Estilizar com CSS</h4>
+                            <h4>Implementar funcionalidades extremamente complexas do gerenciador acadêmico para todos os estudantes da universidade</h4>
                             <p>Projeto: Gerenciador Acadêmico</p>
                             <p>Responsável: Maria</p>
-                            <p>Prazo: 20/08/2026</p>
-                            <p>Prioridade: Média</p>
+                            <p class="prazo">Prazo:20/08/2026</p>
+                            <p class="prioridade"> Média</p>
                         </article>
                     </li> 
                 </ul> 
             </section>
 
-            <section aria-labelledby="titulo-em-andamento">
+            <section class="coluna-status" aria-labelledby="titulo-em-andamento">
                 <h3 id="titulo-em-andamento">Em andamento</h3>
                 <ul>
                     <li>
@@ -91,8 +110,8 @@
                             <h4>Implementar funcionalidades com JavaScript</h4>
                             <p>Projeto: Gerenciador Acadêmico</p>
                             <p>Responsável: João</p>
-                            <p>Prazo: 25/08/2026</p>
-                            <p>Prioridade: Alta</p>
+                            <p class="prazo">Prazo:25/08/2026</p>
+                            <p class="prioridade"> Alta</p>
                         </article>
                     </li>
                
@@ -101,14 +120,14 @@
                             <h4>Testar funcionalidades</h4>
                             <p>Projeto: Gerenciador Acadêmico</p>
                             <p>Responsável: Ana</p>
-                            <p>Prazo: 30/08/2026</p>
-                            <p>Prioridade: Média</p>
+                            <p class="prazo">Prazo:30/08/2026</p>
+                            <p class="prioridade"> Média</p>
                         </article>
                     </li>
                 </ul>
         </section>
 
-        <section aria-labelledby="titulo-em-revisao">
+        <section class="coluna-status" aria-labelledby="titulo-em-revisao">
             <h3 id="titulo-em-revisao">Em revisão</h3>
             <ul>
                 <li>
@@ -116,8 +135,8 @@
                         <h4>Revisar código e documentação</h4>
                         <p>Projeto: Gerenciador Acadêmico</p>
                         <p>Responsável: Lucas</p>
-                        <p>Prazo: 05/09/2026</p>
-                        <p>Prioridade: Baixa</p>
+                        <p class="prazo">Prazo:05/09/2026</p>
+                        <p class="prioridade"> Baixa</p>
                     </article>
                 </li>
             
@@ -126,13 +145,13 @@
                         <h4>Revisar design e layout</h4>
                         <p>Projeto: Gerenciador Acadêmico</p>
                         <p>Responsável: Beatriz</p>
-                        <p>Prazo: 10/09/2026</p>
-                        <p>Prioridade: Média</p>
+                        <p class="prazo">Prazo:10/09/2026</p>
+                        <p class="prioridade"> Média</p>
                     </article>
                 </li>
             </ul>
         </section>
-        <section aria-labelledby="titulo-concluida">
+        <section class="coluna-status" aria-labelledby="titulo-concluida">
             <h3 id="titulo-concluida">Concluída</h3>
             <ul>
                 <li>
@@ -140,8 +159,8 @@
                         <h4>Planejar estrutura do projeto</h4>
                         <p>Projeto: Gerenciador Acadêmico</p>
                         <p>Responsável: Pedro</p>
-                        <p>Prazo: 01/08/2026</p>
-                        <p>Prioridade: Alta</p>
+                        <p class="prazo">Prazo:01/08/2026</p>
+                        <p class="prioridade"> Alta</p>
                     </article>
                 </li>
             
@@ -150,8 +169,8 @@
                         <h4>Definir requisitos e funcionalidades</h4>
                         <p>Projeto: Gerenciador Acadêmico</p>
                         <p>Responsável: Carolina</p>
-                        <p>Prazo: 05/08/2026</p>
-                        <p>Prioridade: Média</p>
+                        <p class="prazo">Prazo:05/08/2026</p>
+                        <p class="prioridade"> Média</p>
                     </article>
                 </li>
             </ul>

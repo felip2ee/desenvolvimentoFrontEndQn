@@ -87,3 +87,104 @@ input[type="search"] {
   border-radius: var(--raio);
   font: inherit;
 }
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-medio);
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-pequeno);
+
+  padding: var(--espaco-medio);
+  background-color: var(--cor-cartao);
+  color: var(--cor-texto-cartao);
+
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+
+  min-width: 0;
+}
+
+.prazo {
+  margin-top: auto;
+
+}
+
+.prioridade {
+  font-weight: 700;
+}
+
+article h4 {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.coluna-status ul {
+  flex: 1;
+}
+
+.coluna-status {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.titulo-quadro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-medio);
+}
+
+/* A partir daqui há espaço para exibir as quatro colunas
+   sem comprimir excessivamente o conteúdo dos cartões. */
+@media (min-width: 64rem) {
+  .titulo-quadro {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .titulo-quadro > h2 {
+    grid-column: 1 / -1;
+  }
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-medio);
+}
+
+.opcao-filtro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.5rem;
+}
+
+.coluna-status {
+  border-top: 0.25rem solid;
+  padding-top: var(--espaco-pequeno);
+}
+
+.coluna-status[aria-labelledby="titulo-a-fazer"] {
+  border-color: var(--cor-a-fazer);
+}
+
+.coluna-status[aria-labelledby="titulo-em-andamento"] {
+  border-color: var(--cor-em-andamento);
+}
+
+.coluna-status[aria-labelledby="titulo-em-revisao"] {
+  border-color: var(--cor-em-revisao);
+}
+
+.coluna-status[aria-labelledby="titulo-concluida"] {
+  border-color: var(--cor-concluida);
+}
