@@ -1,983 +1,201 @@
 :root {
+    /* Cores principais */
+    --cor-fundo: oklch(1 0 0);
+    --cor-texto: oklch(0.145 0 0);
 
-    /* Cores */
+    /* Cartões */
+    --cor-cartao: oklch(1 0 0);
+    --cor-texto-cartao: oklch(0.145 0 0);
 
-    --cor-fundo: oklch(0.975 0 0);
+    /* Elementos secundários */
+    --cor-suave: oklch(0.97 0 0);
+    --cor-texto-suave: oklch(0.556 0 0);
 
-    --cor-superficie: oklch(1 0 0);
+    /* Destaque */
+    --cor-primaria: oklch(0.205 0 0);
+    --cor-texto-primaria: oklch(0.985 0 0);
 
-    --cor-texto: oklch(0.18 0 0);
+    /* Controles e bordas */
+    --cor-borda: oklch(0.922 0 0);
+    --cor-input: oklch(0.922 0 0);
+    --cor-foco: oklch(0.708 0 0);
 
-    --cor-texto-suave: oklch(0.48 0 0);
-
-    --cor-borda: oklch(0.90 0 0);
-
-    --cor-suave: oklch(0.955 0 0);
-
-    --cor-foco: oklch(0.60 0.19 255);
-
-
-    /* Status */
-
-    --cor-a-fazer: oklch(0.62 0.19 255);
-
-    --cor-em-andamento: oklch(0.73 0.18 75);
-
-    --cor-em-revisao: oklch(0.62 0.18 300);
-
+    /* Cores dos status */
+    --cor-a-fazer: oklch(0.556 0 0);
+    --cor-em-andamento: oklch(0.62 0.19 255);
+    --cor-em-revisao: oklch(0.72 0.16 75);
     --cor-concluida: oklch(0.62 0.17 145);
 
-
-    /* Espaçamento */
-
+    /* Escala de espaçamento */
     --espaco-pequeno: 0.5rem;
-
     --espaco-medio: 1rem;
-
     --espaco-grande: 1.5rem;
 
-
-    /* Raio */
-
-    --raio: 0.9rem;
+    /* Arredondamento */
+    --raio: 0.625rem;
 }
 
-
-/* ========================================
-   BASE
-======================================== */
-
-*,
-*::before,
-*::after {
+* {
     box-sizing: border-box;
 }
 
-
 body {
-
     margin: 0;
-
     background-color: var(--cor-fundo);
-
     color: var(--cor-texto);
-
-    font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
+    font-family: Arial, sans-serif;
     font-size: 1rem;
-
     line-height: 1.5;
 }
-
-
-/* ========================================
-   CONTAINER
-======================================== */
 
 header,
 main,
 footer {
-
-    width: min(100%, 96rem);
-
-    margin-inline: auto;
-
-    padding-inline: var(--espaco-medio);
+    padding: var(--espaco-medio);
 }
 
-
-header {
-
-    padding-top: 2.5rem;
-
-    padding-bottom: 1.75rem;
+h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
 }
-
-
-main {
-
-    padding-bottom: 2rem;
-}
-
-
-footer {
-
-    padding-block: 2rem;
-
-    color: var(--cor-texto-suave);
-
-    text-align: center;
-
-    font-size: 0.85rem;
-}
-
-
-/* ========================================
-   TIPOGRAFIA
-======================================== */
-
-h1,
 h2,
 h3,
 h4,
 p {
-
     margin-top: 0;
 }
 
-
-h1 {
-
-    margin-bottom: 0.5rem;
-
-    font-size:
-        clamp(
-            1.8rem,
-            3vw,
-            2.75rem
-        );
-
-    line-height: 1.05;
-
-    letter-spacing: -0.04em;
-}
-
-
-.subtitulo {
-
-    margin-bottom: 0;
-
-    color: var(--cor-texto-suave);
-
-    font-size: 0.95rem;
-}
-
-
-h2 {
-
-    margin-bottom: 1rem;
-
-    font-size: 1.1rem;
-
-    letter-spacing: -0.02em;
-}
-
-
-h3 {
-
-    margin-bottom: 0;
-
-    font-size: 1rem;
-
-    letter-spacing: -0.015em;
-}
-
-
-h4 {
-
-    font-size: 0.95rem;
-
-    line-height: 1.4;
-}
-
-
-/* ========================================
-   SEÇÕES
-======================================== */
-
 section {
-
     margin-bottom: var(--espaco-grande);
 }
 
-
-/* ========================================
-   FILTROS
-======================================== */
-
-.area-filtros {
-
-    margin-bottom: 2rem;
-}
-
-
-.area-filtros > h2 {
-
-    margin-bottom: 0.75rem;
-}
-
-
 form {
-
     display: flex;
-
     flex-direction: column;
-
     gap: var(--espaco-medio);
-
-
-    padding: 1.25rem;
-
-
-    background-color:
-        var(--cor-superficie);
-
-
-    border:
-
-        1px solid
-
-        var(--cor-borda);
-
-
-    border-radius:
-
-        var(--raio);
-
-
-    box-shadow:
-
-        0 0.0625rem 0.125rem
-        rgb(0 0 0 / 3%),
-
-        0 0.75rem 2rem
-        rgb(0 0 0 / 4%);
 }
 
-
-/* ========================================
-   BUSCA
-======================================== */
-
-.campo-busca {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 0.5rem;
-
-    min-width: 0;
+fieldset {
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    padding: var(--espaco-medio);
 }
-
-
-.campo-busca label {
-
-    font-size: 0.78rem;
-
-    font-weight: 650;
-}
-
 
 input[type="search"] {
-
     width: 100%;
-
-    min-width: 0;
-
-
-    min-height: 2.75rem;
-
-
-    padding:
-
-        0.65rem
-
-        0.85rem;
-
-
-    background-color:
-
-        var(--cor-suave);
-
-
-    color:
-
-        var(--cor-texto);
-
-
-    border:
-
-        1px solid
-
-        transparent;
-
-
-    border-radius:
-
-        0.7rem;
-
-
+    padding: var(--espaco-pequeno);
+    border: 1px solid var(--cor-input);
+    border-radius: var(--raio);
     font: inherit;
 }
 
-
-/* ========================================
-   FIELDSETS
-======================================== */
-
-fieldset {
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     display: flex;
-
-    flex-wrap: wrap;
-
-    align-content: center;
-
-
-    min-width: 0;
-
-
-    gap:
-
-        0.45rem;
-
-
-    margin: 0;
-
-    padding: 0;
-
-
-    border: 0;
+    flex-direction: column;
+    gap: var(--espaco-medio);
 }
-
-
-legend {
-
-    width: 100%;
-
-    margin-bottom: 0.5rem;
-
-    padding: 0;
-
-
-    color:
-
-        var(--cor-texto);
-
-
-    font-size:
-
-        0.78rem;
-
-
-    font-weight:
-
-        650;
-}
-
-
-/* ========================================
-   FILTROS EM PILLS
-======================================== */
-
-.opcao-filtro {
-
-    display:
-
-        inline-flex;
-
-
-    align-items:
-
-        center;
-
-
-    min-height:
-
-        2.35rem;
-
-
-    gap:
-
-        0.4rem;
-
-
-    padding:
-
-        0.3rem
-
-        0.65rem;
-
-
-    background-color:
-
-        var(--cor-suave);
-
-
-    border:
-
-        1px solid
-
-        transparent;
-
-
-    border-radius:
-
-        999rem;
-}
-
-
-.opcao-filtro label {
-
-    font-size:
-
-        0.8rem;
-
-
-    white-space:
-
-        nowrap;
-
-
-    cursor:
-
-        pointer;
-}
-
-
-input[type="radio"] {
-
-    width:
-
-        1.5rem;
-
-
-    height:
-
-        1.5rem;
-
-
-    margin:
-
-        0;
-
-
-    cursor:
-
-        pointer;
-}
-
-
-/* ========================================
-   FOCO
-======================================== */
-
-input:focus-visible {
-
-    outline:
-
-        0.1875rem
-
-        solid
-
-        var(--cor-foco);
-
-
-    outline-offset:
-
-        0.125rem;
-}
-
-
-/* ========================================
-   QUADRO
-   MOBILE FIRST
-======================================== */
-
-.titulo-quadro {
-
-    display:
-
-        grid;
-
-
-    grid-template-columns:
-
-        1fr;
-
-
-    gap:
-
-        var(--espaco-medio);
-}
-
-
-.titulo-quadro > h2 {
-
-    margin-bottom:
-
-        0;
-}
-
-
-/* ========================================
-   COLUNAS
-======================================== */
-
-.coluna-status {
-
-    display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    min-width:
-
-        0;
-
-
-    margin-bottom:
-
-        0;
-
-
-    padding:
-
-        1rem;
-
-
-    background-color:
-
-        var(--cor-superficie);
-
-
-    border:
-
-        1px solid
-
-        var(--cor-borda);
-
-
-    border-radius:
-
-        var(--raio);
-
-
-    box-shadow:
-
-        0 0.0625rem 0.125rem
-        rgb(0 0 0 / 2%),
-
-        0 0.5rem 1.5rem
-        rgb(0 0 0 / 3%);
-}
-
-
-.coluna-status > h3 {
-
-    padding-bottom:
-
-        0.85rem;
-}
-
-
-/* ========================================
-   STATUS
-======================================== */
-
-.coluna-status[
-    aria-labelledby="titulo-a-fazer"
-] {
-
-    border-top:
-
-        0.25rem solid
-
-        var(--cor-a-fazer);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-em-andamento"
-] {
-
-    border-top:
-
-        0.25rem solid
-
-        var(--cor-em-andamento);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-em-revisao"
-] {
-
-    border-top:
-
-        0.25rem solid
-
-        var(--cor-em-revisao);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-concluida"
-] {
-
-    border-top:
-
-        0.25rem solid
-
-        var(--cor-concluida);
-}
-
-
-/* ========================================
-   LISTAS
-======================================== */
-
-.coluna-status ul {
-
-    flex:
-
-        1;
-
-
-    display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    gap:
-
-        0.75rem;
-
-
-    margin:
-
-        0;
-
-
-    padding:
-
-        0;
-
-
-    list-style:
-
-        none;
-}
-
-
-/* ========================================
-   CARTÕES
-======================================== */
 
 article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-pequeno);
 
-    display:
+    padding: var(--espaco-medio);
+    background-color: var(--cor-cartao);
+    color: var(--cor-texto-cartao);
 
-        flex;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
 
-
-    flex-direction:
-
-        column;
-
-
-    min-width:
-
-        0;
-
-
-    min-height:
-
-        10rem;
-
-
-    gap:
-
-        0.4rem;
-
-
-    padding:
-
-        1rem;
-
-
-    background-color:
-
-        var(--cor-superficie);
-
-
-    color:
-
-        var(--cor-texto);
-
-
-    border:
-
-        1px solid
-
-        var(--cor-borda);
-
-
-    border-radius:
-
-        0.75rem;
-
-
-    box-shadow:
-
-        0 0.0625rem 0.125rem
-        rgb(0 0 0 / 4%),
-
-        0 0.35rem 1rem
-        rgb(0 0 0 / 4%);
+    min-width: 0;
 }
-
-
-/* ========================================
-   ACENTO LATERAL DO STATUS
-======================================== */
-
-.coluna-status[
-    aria-labelledby="titulo-a-fazer"
-] article {
-
-    border-left:
-
-        0.2rem solid
-
-        var(--cor-a-fazer);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-em-andamento"
-] article {
-
-    border-left:
-
-        0.2rem solid
-
-        var(--cor-em-andamento);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-em-revisao"
-] article {
-
-    border-left:
-
-        0.2rem solid
-
-        var(--cor-em-revisao);
-}
-
-
-.coluna-status[
-    aria-labelledby="titulo-concluida"
-] article {
-
-    border-left:
-
-        0.2rem solid
-
-        var(--cor-concluida);
-}
-
-
-/* ========================================
-   TÍTULO DO CARD
-======================================== */
-
-article h4 {
-
-    flex:
-
-        1;
-
-
-    min-width:
-
-        0;
-
-
-    margin-bottom:
-
-        0.5rem;
-
-
-    overflow:
-
-        hidden;
-
-
-    white-space:
-
-        nowrap;
-
-
-    text-overflow:
-
-        ellipsis;
-
-
-    font-weight:
-
-        650;
-}
-
-
-/* ========================================
-   CONTEÚDO DO CARD
-======================================== */
-
-article p {
-
-    margin-bottom:
-
-        0;
-
-
-    color:
-
-        var(--cor-texto-suave);
-
-
-    font-size:
-
-        0.8rem;
-}
-
-
-/* ========================================
-   PRIORIDADE
-======================================== */
 
 .prioridade {
-
-    color:
-
-        var(--cor-texto)
-
-        !important;
-
-
-    font-weight:
-
-        700;
+    font-weight: 700;
 }
 
-
-/* ========================================
-   PRAZO
-======================================== */
+article h4 {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 .prazo {
-
-    margin-top:
-
-        auto;
-
-
-    color:
-
-        var(--cor-texto-suave);
+    margin-top: auto;
+}
+.coluna-status ul {
+    flex: 1;
 }
 
+.coluna-status {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.titulo-quadro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espaco-medio);
+}
 
-/* ========================================
-   BREAKPOINT
-======================================== */
-
-/*
-   A partir de 64rem há espaço suficiente
-   para organizar os filtros horizontalmente
-   e exibir quatro colunas sem comprimir
-   excessivamente o conteúdo dos cartões.
-*/
-
+/* A partir daqui há espaço para exibir as quatro colunas
+   sem comprimir excessivamente o conteúdo dos cartões. */
 @media (min-width: 64rem) {
+  .titulo-quadro {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
-    header,
-    main,
-    footer {
-
-        padding-inline:
-
-            var(--espaco-grande);
-    }
-
-
-    form {
-
-        display:
-
-            grid;
-
-
-        grid-template-columns:
-
-            minmax(13rem, 1.1fr)
-
-            minmax(0, 2fr)
-
-            minmax(0, 1.45fr);
-
-
-        align-items:
-
-            start;
-
-
-        gap:
-
-            1.25rem;
-    }
-
-
-    .campo-busca,
-    fieldset {
-
-        min-width:
-
-            0;
-    }
-
-
-    .titulo-quadro {
-
-        grid-template-columns:
-
-            repeat(
-                4,
-                minmax(0, 1fr)
-            );
-
-
-        gap:
-
-            1rem;
-    }
-
-
-    .titulo-quadro > h2 {
-
-        grid-column:
-
-            1 / -1;
-    }
+  .titulo-quadro > h2 {
+    grid-column: 1 / -1;
+  }
 }
 
+fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-medio);
+}
+
+.opcao-filtro {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espaco-pequeno);
+    min-height: 1.5rem;
+}
+
+.coluna-status {
+    border-top: 0.25rem solid;
+    padding-top: var(--espaco-pequeno);
+}
+
+.coluna-status[aria-labelledby="titulo-a-fazer"] {
+    border-color: var(--cor-a-fazer);
+}
+
+.coluna-status[aria-labelledby="titulo-em-andamento"] {
+    border-color: var(--cor-em-andamento);
+}
+
+.coluna-status[aria-labelledby="titulo-em-revisao"] {
+    border-color: var(--cor-em-revisao);
+}
+
+.coluna-status[aria-labelledby="titulo-concluida"] {
+    border-color: var(--cor-concluida);
+}
+
+input:focus-visible {
+    outline: 0.1875rem solid var(--cor-foco);
+    outline-offset: 0.125rem;
+}
+
+input[type="radio"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+}
