@@ -590,12 +590,25 @@ footer p {
     margin-bottom: 0;
 }
 
+.mensagem-coluna-vazia {
+    display: grid;
+    min-height: 8rem;
+    place-items: center;
+    padding: 1rem;
+    color: var(--cor-texto-suave);
+    border: 0.125rem dashed var(--cor-borda-forte);
+    border-radius: var(--raio-medio);
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
 /* ========================================
    DESKTOP
 ======================================== */
 
 @media (min-width: 64rem) {
-    main,
+    main,   
     footer {
         padding-inline: var(--espaco-grande);
     }
@@ -644,3 +657,4 @@ footer p {
         transition-duration: 0.01ms !important;
     }
 }
+

@@ -25,15 +25,9 @@
             <form>
 
                 <div class="campo-busca">
-                    <label for="busca-tarefa">
-                        Buscar tarefa por título
-                    </label>
+                    <label for="busca-tarefa">Buscar tarefa por título</label>
 
-                    <input
-                        type="search"
-                        id="busca-tarefa"
-                        name="busca"
-                    >
+                    <input type="search" id="busca-tarefa" name="busca" placeholder="Digite o título da tarefa">
                 </div>
 
                 <fieldset>
@@ -148,17 +142,14 @@
 
         </section>
 
+        <p data-estado role="status" aria-live="polite"></p>
 
-        <section class="titulo-quadro" aria-labelledby="titulo-quadro">
+        <section class="titulo-quadro" aria-labelledby="titulo-quadro" data-quadro>
 
             <h2 id="titulo-quadro">Quadro de tarefas</h2>
 
 
-            <section
-                class="coluna-status"
-                aria-labelledby="titulo-a-fazer"
-            >
-
+            <section class="coluna-status" aria-labelledby="titulo-a-fazer">
                 <h3 id="titulo-a-fazer">A fazer</h3>
                     
                 <ul data-lista-status="a-fazer"></ul>
@@ -166,11 +157,7 @@
             </section>
 
 
-            <section
-                class="coluna-status"
-                aria-labelledby="titulo-em-andamento"
-            >
-
+            <section class="coluna-status" aria-labelledby="titulo-em-andamento">
                 <h3 id="titulo-em-andamento">Em andamento</h3>
 
                 <ul data-lista-status="em-andamento"></ul>
@@ -178,28 +165,16 @@
             </section>
 
 
-            <section
-                class="coluna-status"
-                aria-labelledby="titulo-em-revisao"
-            >
-
-                <h3 id="titulo-em-revisao">
-                    Em revisão
-                </h3>
+            <section class="coluna-status" aria-labelledby="titulo-em-revisao">
+                <h3 id="titulo-em-revisao">Em revisão</h3>
 
                 <ul data-lista-status="em-revisao"></ul>
 
             </section>
 
 
-            <section
-                class="coluna-status"
-                aria-labelledby="titulo-concluida"
-            >
-
-                <h3 id="titulo-concluida">
-                    Concluída
-                </h3>
+            <section class="coluna-status" aria-labelledby="titulo-concluida">
+                <h3 id="titulo-concluida">Concluída</h3>
 
                 <ul data-lista-status="concluida"></ul>
 

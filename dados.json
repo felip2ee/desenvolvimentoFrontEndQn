@@ -1,0 +1,60 @@
+{
+    "tarefas": [
+        {
+            "id": "t1",
+            "titulo": "Estudar os critérios da E3",
+            "status": "a-fazer",
+            "prioridade": "alta",
+            "prazo": "2026-09-05"
+        },
+        {
+            "id": "t2",
+            "titulo": "Revisar JavaScript assíncrono",
+            "status": "a-fazer",
+            "prioridade": "media",
+            "prazo": "2026-09-06"
+        },
+        {
+            "id": "t3",
+            "titulo": "Criar cartões com JavaScript",
+            "status": "em-andamento",
+            "prioridade": "alta",
+            "prazo": "2026-09-07"
+        },
+        {
+            "id": "t4",
+            "titulo": "Testar a delegação de eventos",
+            "status": "em-andamento",
+            "prioridade": "media",
+            "prazo": "2026-09-07"
+        },
+        {
+            "id": "t5",
+            "titulo": "Revisar a acessibilidade da página",
+            "status": "em-revisao",
+            "prioridade": "alta",
+            "prazo": "2026-09-08"
+        },
+        {
+            "id": "t6",
+            "titulo": "Conferir os quatro estados da tela",
+            "status": "em-revisao",
+            "prioridade": "baixa",
+            "prazo": "2026-09-08"
+        },
+        {
+            "id": "t7",
+            "titulo": "Construir o layout responsivo da E2",
+            "status": "concluida",
+            "prioridade": "alta",
+            "prazo": "2026-08-25"
+        },
+        {
+            "id": "t8",
+            "titulo": "Definir a identidade visual do projeto",
+            "status": "concluida",
+            "prioridade": "media",
+            "prazo": "2026-08-26"
+        }
+    ]
+}
