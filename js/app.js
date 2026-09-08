@@ -5,6 +5,11 @@ const estado = document.querySelector("[data-estado]");
 const botaoTentarNovamente = document.querySelector(
     "[data-tentar-novamente]"
 );
+const formularioFiltros = document.querySelector(
+    ".area-filtros form"
+);
+
+let tarefasCarregadas = [];
 
 async function carregarTarefas() {
     estado.textContent = "Carregando tarefas...";
@@ -24,6 +29,7 @@ async function carregarTarefas() {
                 'O JSON precisa possuir a propriedade "tarefas" como array.'
             );
         }
+        tarefasCarregadas = documento.tarefas;
 
         if (documento.tarefas.length === 0) {
             renderizarTarefas([], quadro);
@@ -46,9 +52,33 @@ async function carregarTarefas() {
         console.error("Falha ao carregar tarefas:", erro);
     }
 }
+
+function aplicarFiltroPrioridade() {
+    const dadosFormulario = new FormData(formularioFiltros);
+    const prioridadeSelecionada =
+        dadosFormulario.get("prioridade");
+
+    const tarefasFiltradas =
+        prioridadeSelecionada === "todas"
+            ? tarefasCarregadas
+            : tarefasCarregadas.filter(
+                (tarefa) =>
+                    tarefa.prioridade === prioridadeSelecionada
+            );
+
+    renderizarTarefas(tarefasFiltradas, quadro);
+}
+
 botaoTentarNovamente.addEventListener(
     "click",
     carregarTarefas
 );
 
+formularioFiltros.addEventListener(
+    "change",
+    aplicarFiltroPrioridade
+);
+
 carregarTarefas();
+
+
