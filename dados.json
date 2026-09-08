@@ -3,6 +3,7 @@
         {
             "id": "t1",
             "titulo": "Estudar os critérios da E3",
+            "projeto": "Desenvolvimento Frontend",
             "status": "a-fazer",
             "prioridade": "alta",
             "prazo": "2026-09-05"
@@ -10,6 +11,7 @@
         {
             "id": "t2",
             "titulo": "Revisar JavaScript assíncrono",
+            "projeto": "Desenvolvimento Frontend",
             "status": "a-fazer",
             "prioridade": "media",
             "prazo": "2026-09-06"
@@ -17,6 +19,7 @@
         {
             "id": "t3",
             "titulo": "Criar cartões com JavaScript",
+            "projeto": "Desenvolvimento Frontend",
             "status": "em-andamento",
             "prioridade": "alta",
             "prazo": "2026-09-07"
@@ -24,6 +27,7 @@
         {
             "id": "t4",
             "titulo": "Testar a delegação de eventos",
+            "projeto": "Desenvolvimento Frontend",
             "status": "em-andamento",
             "prioridade": "media",
             "prazo": "2026-09-07"
@@ -31,6 +35,7 @@
         {
             "id": "t5",
             "titulo": "Revisar a acessibilidade da página",
+            "projeto": "Desenvolvimento Frontend",
             "status": "em-revisao",
             "prioridade": "alta",
             "prazo": "2026-09-08"
@@ -38,6 +43,7 @@
         {
             "id": "t6",
             "titulo": "Conferir os quatro estados da tela",
+            "projeto": "Desenvolvimento Frontend",
             "status": "em-revisao",
             "prioridade": "baixa",
             "prazo": "2026-09-08"
@@ -45,6 +51,7 @@
         {
             "id": "t7",
             "titulo": "Construir o layout responsivo da E2",
+            "projeto": "Desenvolvimento Frontend",
             "status": "concluida",
             "prioridade": "alta",
             "prazo": "2026-08-25"
@@ -52,6 +59,7 @@
         {
             "id": "t8",
             "titulo": "Definir a identidade visual do projeto",
+            "projeto": "Desenvolvimento Frontend",
             "status": "concluida",
             "prioridade": "media",
             "prazo": "2026-08-26"

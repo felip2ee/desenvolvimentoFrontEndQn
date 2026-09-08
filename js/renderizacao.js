@@ -4,18 +4,23 @@ export function criarCartao(tarefa) {
     const titulo = document.createElement("h4");
     const prioridade = document.createElement("p");
     const prazo = document.createElement("p");
+    const projeto = document.createElement("p");
 
     cartao.dataset.tarefaId = tarefa.id;
 
     titulo.textContent = tarefa.titulo;
 
     prioridade.className = "prioridade";
+    prioridade.classList.add(`prioridade--${tarefa.prioridade}`);
     prioridade.textContent = tarefa.prioridade;
 
     prazo.className = "prazo";
     prazo.textContent = `Prazo: ${tarefa.prazo}`;
 
-    cartao.append(titulo, prioridade, prazo);
+    projeto.className = "projeto";
+    projeto.textContent = tarefa.projeto;
+
+    cartao.append(titulo, projeto, prioridade, prazo);
     item.append(cartao);
 
     return item;
@@ -43,5 +48,10 @@ export function renderizarTarefas(tarefas, quadro) {
         }
 
         lista.replaceChildren(...cartoes);
+
+        const tituloDaColuna = lista.previousElementSibling;
+        tituloDaColuna.dataset.contagem = tarefasDoStatus.length;
+        
     });
 }
+
