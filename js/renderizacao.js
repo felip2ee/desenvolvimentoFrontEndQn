@@ -5,6 +5,7 @@ export function criarCartao(tarefa) {
     const prioridade = document.createElement("p");
     const prazo = document.createElement("p");
     const projeto = document.createElement("p");
+    const botaoDetalhes = document.createElement("button");
 
     cartao.dataset.tarefaId = tarefa.id;
 
@@ -20,8 +21,22 @@ export function criarCartao(tarefa) {
     projeto.className = "projeto";
     projeto.textContent = tarefa.projeto;
 
-    cartao.append(titulo, projeto, prioridade, prazo);
+    botaoDetalhes.type = "button";
+    botaoDetalhes.dataset.acao = "ver-detalhes";
+    botaoDetalhes.className = "botao-detalhes";
+    botaoDetalhes.textContent = "Ver detalhes";
+
+    cartao.append(
+        titulo,
+        projeto,
+        prioridade,
+        prazo,
+        botaoDetalhes
+    );
+
     item.append(cartao);
+
+
 
     return item;
 }
@@ -55,3 +70,34 @@ export function renderizarTarefas(tarefas, quadro) {
     });
 }
 
+export function configurarEventosDoQuadro(
+    quadro,
+    obterTarefas
+) {
+    quadro.addEventListener("click", (evento) => {
+        const botao = evento.target.closest(
+            'button[data-acao="ver-detalhes"]'
+        );
+
+        if (!botao || !quadro.contains(botao)) {
+            return;
+        }
+
+        const cartao = botao.closest("[data-tarefa-id]");
+
+        if (!cartao) {
+            return;
+        }
+
+        const tarefa = obterTarefas().find(
+            (item) =>
+                item.id === cartao.dataset.tarefaId
+        );
+
+        if (!tarefa) {
+            return;
+        }
+
+        console.log("Detalhes da tarefa:", tarefa);
+    });
+}

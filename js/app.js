@@ -1,4 +1,18 @@
-import { renderizarTarefas } from "./renderizacao.js";
+import {
+    renderizarTarefas,
+    configurarEventosDoQuadro
+} from "./renderizacao.js";
+
+import { carregarTarefas } from "./api.js";
+
+import { 
+    mostrarCarregando,
+    mostrarSucesso,
+    mostrarVazio,
+    mostrarErro
+} from "./estados.js";
+
+
 
 const quadro = document.querySelector("[data-quadro]");
 const estado = document.querySelector("[data-estado]");
@@ -11,44 +25,50 @@ const formularioFiltros = document.querySelector(
 
 let tarefasCarregadas = [];
 
-async function carregarTarefas() {
-    estado.textContent = "Carregando tarefas...";
-    estado.dataset.tipo = "carregando";
-    botaoTentarNovamente.hidden = true;
+configurarEventosDoQuadro(
+    quadro,
+    () => tarefasCarregadas
+);
+
+async function atualizarAplicacao() {
+    mostrarCarregando(estado, botaoTentarNovamente);
 
     try {
-        const resposta = await fetch("./dados.json");
+        tarefasCarregadas = await carregarTarefas();
 
-        if (!resposta.ok) {
-            throw new Error(`Erro HTTP: ${resposta.status}`);
-        }
-
-        const documento = await resposta.json();
-        if (!Array.isArray(documento.tarefas)) {
-            throw new Error(
-                'O JSON precisa possuir a propriedade "tarefas" como array.'
-            );
-        }
-        tarefasCarregadas = documento.tarefas;
-
-        if (documento.tarefas.length === 0) {
+        if (tarefasCarregadas.length === 0) {
             renderizarTarefas([], quadro);
-            estado.textContent = "Nenhuma tarefa encontrada.";
-            estado.dataset.tipo = "vazio";
+            mostrarVazio(estado, botaoTentarNovamente);
             return;
         }
 
-        renderizarTarefas(documento.tarefas, quadro);
+        aplicarFiltros();
 
-        estado.textContent =
-            `${documento.tarefas.length} tarefas carregadas.`;
-        estado.dataset.tipo = "sucesso";
+        mostrarSucesso(
+            estado,
+            botaoTentarNovamente,
+            tarefasCarregadas.length
+        );
     } catch (erro) {
+        tarefasCarregadas = [];
         renderizarTarefas([], quadro);
-        botaoTentarNovamente.hidden = false;
-        botaoTentarNovamente.focus();
-        estado.textContent = "Não foi possível carregar as tarefas.";
-        estado.dataset.tipo = "erro";         
+
+        let mensagem;
+
+        if (erro instanceof TypeError) {
+            mensagem = "Não foi possível conectar ao servidor.";
+        } else if (erro instanceof SyntaxError) {
+            mensagem = "O arquivo JSON possui formato inválido.";
+        } else {
+            mensagem = "Não foi possível carregar as tarefas.";
+        }
+
+        mostrarErro(
+            estado,
+            botaoTentarNovamente,
+            mensagem
+        );
+
         console.error("Falha ao carregar tarefas:", erro);
     }
 }
@@ -94,7 +114,7 @@ function aplicarFiltros() {
 
 botaoTentarNovamente.addEventListener(
     "click",
-    carregarTarefas
+    atualizarAplicacao
 );
 
 formularioFiltros.addEventListener(
@@ -102,6 +122,6 @@ formularioFiltros.addEventListener(
     aplicarFiltros
 );
 
-carregarTarefas();
+atualizarAplicacao();
 
 
