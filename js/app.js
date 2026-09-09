@@ -53,18 +53,41 @@ async function carregarTarefas() {
     }
 }
 
-function aplicarFiltroPrioridade() {
+function aplicarFiltros() {
     const dadosFormulario = new FormData(formularioFiltros);
+
+    const textoBuscado = dadosFormulario
+        .get("busca")
+        .trim()
+        .toLowerCase();
+
+    const statusSelecionado =
+        dadosFormulario.get("status");
+
     const prioridadeSelecionada =
         dadosFormulario.get("prioridade");
 
-    const tarefasFiltradas =
-        prioridadeSelecionada === "todas"
-            ? tarefasCarregadas
-            : tarefasCarregadas.filter(
-                (tarefa) =>
-                    tarefa.prioridade === prioridadeSelecionada
+    const tarefasFiltradas = tarefasCarregadas.filter(
+        (tarefa) => {
+            const correspondeAoTexto = tarefa.titulo
+                .toLowerCase()
+                .includes(textoBuscado);
+
+            const correspondeAoStatus =
+                statusSelecionado === "todos" ||
+                tarefa.status === statusSelecionado;
+
+            const correspondeAPrioridade =
+                prioridadeSelecionada === "todas" ||
+                tarefa.prioridade === prioridadeSelecionada;
+
+            return (
+                correspondeAoTexto &&
+                correspondeAoStatus &&
+                correspondeAPrioridade
             );
+        }
+    );
 
     renderizarTarefas(tarefasFiltradas, quadro);
 }
@@ -75,8 +98,8 @@ botaoTentarNovamente.addEventListener(
 );
 
 formularioFiltros.addEventListener(
-    "change",
-    aplicarFiltroPrioridade
+    "input",
+    aplicarFiltros
 );
 
 carregarTarefas();
