@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Tarefas Acadêmicas</title>
     <link rel="stylesheet" href="styles.css">
-    
 </head>
 
 <body>
@@ -139,6 +138,20 @@
 
                 </fieldset>
 
+                <div class="campo-ordenacao">
+                    <label for="ordenacao">Ordenar por prazo</label>
+
+                    <select id="ordenacao" name="ordenacao">
+                        <option value="original">Ordem original</option>
+                        <option value="prazo-crescente">Prazo mais próximo primeiro</option>
+                        <option value="prazo-decrescente">Prazo mais distante primeiro</option>
+                    </select>
+
+                    <button type="button" class="botao-limpar" data-limpar-filtros>
+                        Limpar filtros
+                    </button>
+                </div>
+
             </form>
 
         </section>
@@ -151,7 +164,7 @@
             </button>
         </div>
 
-        <section class="titulo-quadro" aria-labelledby="titulo-quadro" data-quadro>
+        <section class="quadro" aria-labelledby="titulo-quadro" data-quadro>
 
             <h2 id="titulo-quadro">Quadro de tarefas</h2>
 

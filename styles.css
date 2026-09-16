@@ -1,16 +1,16 @@
 :root {
     /* Identidade visual */
     --verde-principal: #58cc02;
-    --verde-escuro: #46a302;
+    --verde-escuro: #2f6f00;
     --verde-claro: #e9f8df;
     --azul-principal: #1cb0f6;
-    --azul-escuro: #168dcc;
+    --azul-escuro: #0b6aa0;
     --azul-claro: #e7f6fe;
     --laranja-principal: #ff9600;
-    --laranja-escuro: #d87b00;
+    --laranja-escuro: #9a5700;
     --laranja-claro: #fff5dc;
     --coral-principal: #ff5d45;
-    --coral-escuro: #db4632;
+    --coral-escuro: #b02a17;
     --coral-claro: #fff0ed;
 
     /* Superfícies e texto */
@@ -87,7 +87,7 @@ header {
     position: relative;
     overflow: hidden;
     padding: 1.35rem max(1rem, calc((100% - var(--largura-maxima)) / 2 + 1.5rem));
-    background: linear-gradient(135deg, #58cc02 0%, #49b902 100%);
+    background: linear-gradient(135deg, #2f7d00 0%, #276b00 100%);
     color: #ffffff;
     border-bottom: 0.25rem solid var(--verde-escuro);
 }
@@ -143,7 +143,7 @@ h1::before {
     position: relative;
     z-index: 1;
     margin: 0 0 0 3.4rem;
-    color: rgb(255 255 255 / 88%);
+    color: #ffffff;
     font-size: 0.9rem;
     font-weight: 700;
 }
@@ -205,6 +205,7 @@ form {
 }
 
 .campo-busca label,
+.campo-ordenacao label,
 legend {
     padding: 0;
     color: var(--cor-texto-suave);
@@ -314,14 +315,16 @@ legend {
 }
 
 input[type="radio"]:checked + label {
-    background: var(--verde-principal);
+    background: var(--verde-escuro);
     color: #ffffff;
-    border-color: var(--verde-principal);
+    border-color: var(--verde-escuro);
     border-bottom-color: var(--verde-escuro);
 }
 
 .opcao-filtro input[type="radio"]:focus-visible + label,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible,
+.botao-limpar:focus-visible {
     outline: 0.1875rem solid rgb(28 176 246 / 38%);
     outline-offset: 0.125rem;
 }
@@ -330,13 +333,13 @@ input:focus-visible {
    QUADRO - MOBILE FIRST
 ======================================== */
 
-.titulo-quadro {
+.quadro {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-.titulo-quadro > h2 {
+.quadro > h2 {
     display: flex;
     align-items: center;
     gap: 0.45rem;
@@ -344,7 +347,7 @@ input:focus-visible {
     font-size: 1.15rem;
 }
 
-.titulo-quadro > h2::before {
+.quadro > h2::before {
     color: var(--verde-principal);
     content: "▦";
     font-size: 1.3rem;
@@ -563,7 +566,7 @@ article .prioridade::before {
 article .prazo {
     justify-self: end;
     background: #f3f5f8;
-    color: var(--cor-texto-suave);
+    color: var(--cor-texto);
 }
 
 article .prazo::before {
@@ -578,7 +581,7 @@ article .prazo::before {
 footer {
     padding-top: 0.25rem;
     padding-bottom: 1.5rem;
-    color: #8b96a8;
+    color: var(--cor-texto-suave);
     text-align: center;
     font-size: 0.75rem;
     font-weight: 700;
@@ -602,7 +605,12 @@ footer p {
 }
 
 /* ========================================
-   DESKTOP
+   DESKTOP — 64rem (1024px)
+   Por que aqui: arrastando a janela, abaixo de ~64rem as quatro
+   colunas lado a lado ficam com menos de ~13rem cada, os títulos
+   dos cartões truncam quase inteiros e os botões de filtro quebram
+   em várias linhas. A partir daqui cabe o quadro em 4 colunas e o
+   formulário em 3 colunas (busca, status, prioridade).
 ======================================== */
 
 @media (min-width: 64rem) {
@@ -618,18 +626,22 @@ footer p {
         gap: 1.15rem;
     }
 
-    .titulo-quadro {
+    .quadro {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1rem;
     }
 
-    .titulo-quadro > h2 {
+    .quadro > h2,
+    .campo-ordenacao {
         grid-column: 1 / -1;
     }
 }
 
 /* ========================================
-   TELAS MUITO LARGAS
+   TELAS MUITO LARGAS — 90rem (1440px)
+   Por que aqui: a partir de ~90rem cada coluna passa de ~20rem e o
+   respiro interno de 0.85rem fica apertado em relação à largura do
+   cartão; aumentamos o padding para manter a proporção.
 ======================================== */
 
 @media (min-width: 90rem) {
@@ -659,7 +671,7 @@ footer p {
 .prioridade {
     width: fit-content;
     padding: 0.3rem 0.65rem;
-    color: #64748b;
+    color: var(--cor-texto);
     border: 1px solid rgb(255 255 255 / 80%);
     border-radius: 999px;
     font-size: 0.75rem;
@@ -685,7 +697,7 @@ footer p {
     justify-content: center;
     margin-top: 0.75rem;
     padding: 0.65rem 1rem;
-    background: var(--verde-principal);
+    background: var(--verde-escuro);
     color: var(--cor-superficie);
     border: 0;
     border-radius: 0.65rem;
@@ -776,7 +788,8 @@ footer p {
     );
 }
 
-[data-estado][data-tipo="vazio"] {
+[data-estado][data-tipo="vazio"],
+[data-estado][data-tipo="sem-resultados"] {
     color: var(--laranja-escuro);
     background: color-mix(
         in srgb,
@@ -826,4 +839,53 @@ article .botao-detalhes {
 article:has(.botao-detalhes:focus-visible) {
     outline: 0.2rem solid var(--cor-foco);
     outline-offset: 0.2rem;
+}
+
+/* ========================================
+   ORDENAÇÃO E LIMPAR FILTROS
+======================================== */
+
+.campo-ordenacao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.4rem 0.75rem;
+    min-width: 0;
+}
+
+.campo-ordenacao label {
+    flex-basis: 100%;
+}
+
+select {
+    flex: 1 1 12rem;
+    min-width: 0;
+    min-height: 2.85rem;
+    padding: 0.5rem 0.85rem;
+    background: #f7f9fc;
+    color: var(--cor-texto);
+    border: 0.125rem solid var(--cor-borda);
+    border-bottom-width: 0.25rem;
+    border-radius: var(--raio-pequeno);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.botao-limpar {
+    min-height: 2.85rem;
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+    color: var(--cor-texto);
+    border: 0.125rem solid var(--cor-borda-forte);
+    border-bottom-width: 0.25rem;
+    border-radius: var(--raio-pequeno);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.botao-limpar:hover {
+    border-color: var(--verde-escuro);
 }

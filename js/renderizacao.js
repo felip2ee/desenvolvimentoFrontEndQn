@@ -5,6 +5,7 @@ export function criarCartao(tarefa) {
     const prioridade = document.createElement("p");
     const prazo = document.createElement("p");
     const projeto = document.createElement("p");
+    const responsavel = document.createElement("p");
     const botaoDetalhes = document.createElement("button");
 
     cartao.dataset.tarefaId = tarefa.id;
@@ -21,6 +22,9 @@ export function criarCartao(tarefa) {
     projeto.className = "projeto";
     projeto.textContent = tarefa.projeto;
 
+    responsavel.className = "responsavel";
+    responsavel.textContent = `Responsável: ${tarefa.responsavel}`;
+
     botaoDetalhes.type = "button";
     botaoDetalhes.dataset.acao = "ver-detalhes";
     botaoDetalhes.className = "botao-detalhes";
@@ -29,14 +33,13 @@ export function criarCartao(tarefa) {
     cartao.append(
         titulo,
         projeto,
+        responsavel,
         prioridade,
         prazo,
         botaoDetalhes
     );
 
     item.append(cartao);
-
-
 
     return item;
 }
@@ -66,7 +69,6 @@ export function renderizarTarefas(tarefas, quadro) {
 
         const tituloDaColuna = lista.previousElementSibling;
         tituloDaColuna.dataset.contagem = tarefasDoStatus.length;
-        
     });
 }
 

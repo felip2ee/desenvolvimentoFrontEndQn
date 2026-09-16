@@ -5,123 +5,136 @@ import {
 
 import { carregarTarefas } from "./api.js";
 
-import { 
-    mostrarCarregando,
-    mostrarSucesso,
-    mostrarVazio,
-    mostrarErro
-} from "./estados.js";
-
-
+import { renderizarEstado } from "./estados.js";
 
 const quadro = document.querySelector("[data-quadro]");
-const estado = document.querySelector("[data-estado]");
-const botaoTentarNovamente = document.querySelector(
-    "[data-tentar-novamente]"
-);
-const formularioFiltros = document.querySelector(
-    ".area-filtros form"
-);
+const formularioFiltros = document.querySelector(".area-filtros form");
+const botaoLimparFiltros = document.querySelector("[data-limpar-filtros]");
+const botaoTentarNovamente = document.querySelector("[data-tentar-novamente]");
 
-let tarefasCarregadas = [];
+const FILTROS_INICIAIS = {
+    busca: "",
+    status: "todos",
+    prioridade: "todas",
+    ordenacao: "original"
+};
 
-configurarEventosDoQuadro(
-    quadro,
-    () => tarefasCarregadas
-);
+// Fonte única da verdade. A tela é sempre uma projeção deste objeto.
+const estado = {
+    tarefas: [],
+    ...FILTROS_INICIAIS,
+    carregamento: false,
+    erro: null
+};
 
-async function atualizarAplicacao() {
-    mostrarCarregando(estado, botaoTentarNovamente);
+// Recebe o estado e devolve a lista visível.
+// Não consulta o DOM e não altera estado.tarefas.
+function derivarTarefasVisiveis(estadoAtual) {
+    const textoBuscado = estadoAtual.busca.trim().toLowerCase();
+
+    // filter() cria um array novo; o sort() abaixo atua nessa cópia.
+    const visiveis = estadoAtual.tarefas.filter((tarefa) => {
+        const correspondeAoTexto = tarefa.titulo
+            .toLowerCase()
+            .includes(textoBuscado);
+
+        const correspondeAoStatus =
+            estadoAtual.status === "todos" ||
+            tarefa.status === estadoAtual.status;
+
+        const correspondeAPrioridade =
+            estadoAtual.prioridade === "todas" ||
+            tarefa.prioridade === estadoAtual.prioridade;
+
+        return (
+            correspondeAoTexto &&
+            correspondeAoStatus &&
+            correspondeAPrioridade
+        );
+    });
+
+    if (estadoAtual.ordenacao === "prazo-crescente") {
+        visiveis.sort((a, b) => a.prazo.localeCompare(b.prazo));
+    } else if (estadoAtual.ordenacao === "prazo-decrescente") {
+        visiveis.sort((a, b) => b.prazo.localeCompare(a.prazo));
+    }
+
+    return visiveis;
+}
+
+function sincronizarControles() {
+    const campos = formularioFiltros.elements;
+
+    if (campos.busca.value !== estado.busca) {
+        campos.busca.value = estado.busca;
+    }
+
+    campos.status.value = estado.status;
+    campos.prioridade.value = estado.prioridade;
+    campos.ordenacao.value = estado.ordenacao;
+}
+
+// Ponto único de renderização: deriva uma vez e alimenta tudo.
+function atualizarTela() {
+    const visiveis = derivarTarefasVisiveis(estado);
+
+    renderizarTarefas(visiveis, quadro);
+    renderizarEstado(estado, visiveis);
+    sincronizarControles();
+}
+
+function mensagemDeErro(erro) {
+    if (erro.name === "TypeError") {
+        return "Não foi possível conectar ao servidor. Verifique sua conexão.";
+    }
+
+    if (erro.name === "SyntaxError") {
+        return "O arquivo de tarefas está com formato inválido.";
+    }
+
+    return `O servidor respondeu com falha: ${erro.message}`;
+}
+
+async function carregarAplicacao() {
+    estado.carregamento = true;
+    estado.erro = null;
+    atualizarTela();
 
     try {
-        tarefasCarregadas = await carregarTarefas();
-
-        if (tarefasCarregadas.length === 0) {
-            renderizarTarefas([], quadro);
-            mostrarVazio(estado, botaoTentarNovamente);
-            return;
-        }
-
-        aplicarFiltros();
-
-        mostrarSucesso(
-            estado,
-            botaoTentarNovamente,
-            tarefasCarregadas.length
-        );
+        estado.tarefas = await carregarTarefas();
     } catch (erro) {
-        tarefasCarregadas = [];
-        renderizarTarefas([], quadro);
-
-        let mensagem;
-
-        if (erro instanceof TypeError) {
-            mensagem = "Não foi possível conectar ao servidor.";
-        } else if (erro instanceof SyntaxError) {
-            mensagem = "O arquivo JSON possui formato inválido.";
-        } else {
-            mensagem = "Não foi possível carregar as tarefas.";
-        }
-
-        mostrarErro(
-            estado,
-            botaoTentarNovamente,
-            mensagem
-        );
-
+        estado.tarefas = [];
+        estado.erro = mensagemDeErro(erro);
         console.error("Falha ao carregar tarefas:", erro);
     }
+
+    estado.carregamento = false;
+    atualizarTela();
 }
 
-function aplicarFiltros() {
-    const dadosFormulario = new FormData(formularioFiltros);
+configurarEventosDoQuadro(quadro, () => estado.tarefas);
 
-    const textoBuscado = dadosFormulario
-        .get("busca")
-        .trim()
-        .toLowerCase();
+formularioFiltros.addEventListener("input", (evento) => {
+    const campo = evento.target;
 
-    const statusSelecionado =
-        dadosFormulario.get("status");
+    if (!(campo.name in FILTROS_INICIAIS)) {
+        return;
+    }
 
-    const prioridadeSelecionada =
-        dadosFormulario.get("prioridade");
+    estado[campo.name] = campo.value;
+    atualizarTela();
+});
 
-    const tarefasFiltradas = tarefasCarregadas.filter(
-        (tarefa) => {
-            const correspondeAoTexto = tarefa.titulo
-                .toLowerCase()
-                .includes(textoBuscado);
+// Enter na busca não pode recarregar a página.
+formularioFiltros.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+});
 
-            const correspondeAoStatus =
-                statusSelecionado === "todos" ||
-                tarefa.status === statusSelecionado;
+botaoLimparFiltros.addEventListener("click", () => {
+    Object.assign(estado, FILTROS_INICIAIS);
+    atualizarTela();
+});
 
-            const correspondeAPrioridade =
-                prioridadeSelecionada === "todas" ||
-                tarefa.prioridade === prioridadeSelecionada;
+botaoTentarNovamente.addEventListener("click", carregarAplicacao);
 
-            return (
-                correspondeAoTexto &&
-                correspondeAoStatus &&
-                correspondeAPrioridade
-            );
-        }
-    );
-
-    renderizarTarefas(tarefasFiltradas, quadro);
-}
-
-botaoTentarNovamente.addEventListener(
-    "click",
-    atualizarAplicacao
-);
-
-formularioFiltros.addEventListener(
-    "input",
-    aplicarFiltros
-);
-
-atualizarAplicacao();
-
-
+carregarAplicacao();
